@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${channelName}">Subscriptions</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<link th:if="${signedIn} == 'false'" rel="stylesheet"
+	href="/styles/navbar-guest.css" />
+<link th:if="${signedIn} == 'true'" rel="stylesheet"
+	href="/styles/navbar-signed-in.css" />
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/styles/video-cards.css">
+<style>
+.channel-header {
+	padding: 20px 0;
+	border-bottom: 1px solid #eaeaea;
+}
+
+.channel-name {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.subscribe-button {
+	background-color: #00aeff;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	font-size: 16px;
+	margin-left: 20px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.subscribe-button.subscribed {
+	background-color: gray;
+}
+
+.subscriber-count {
+	font-size: 16px;
+	color: #666;
+	margin-top: 8px;
+}
+
+.channel-header .row {
+	align-items: center;
+}
+</style>
+</head>
+<body>
+	<div th:if="${signedIn} == 'false'">
+		<div th:replace="~{fragments/navbar-guest :: navbar}"></div>
+	</div>
+	<div th:if="${signedIn} == 'true'">
+		<div th:replace="~{fragments/navbar-signed-in :: navbar}"></div>
+	</div>
+
+
+	<div class="container">
+		<div class="channel-header">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="channel-name" th:text="${channelName}">Channel
+						Name</div>
+				</div>
+				<div class="col-md-4 text-md-right">
+					<button th:if="${creator} != ${user}" id="subscribe-button"
+						class="subscribe-button" onclick="toggleSubscribe()">Subscribe</button>
+					<div class="subscriber-count" id="subscriber-count"
+						th:text="${subscriberCount}">1.2M subscribers</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div th:replace="~{fragments/video-cards :: video-cards}"></div>
+	</div>
+
+
+	<input th:name="${_csrf.parameterName}" type="hidden"
+		th:value="${_csrf.token}" />
+
+
+	<script>
+		let creator = "[[${creator}]]";
+		let user = "[[${user}]]";
+		let hasSubscribed = "[[${hasSubscribed}]]";
+		let subscriberCount = "[[${subscriberCount}]]";
+	</script>
+	<script src="/scripts/subscribe.js"></script>
+</body>
+</html>

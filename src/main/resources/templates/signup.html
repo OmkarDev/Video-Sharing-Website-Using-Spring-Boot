@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - Video Sharing Platform</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.container {
+	max-width: 400px;
+	margin-top: 100px;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #004085;
+}
+
+.link {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.link a {
+	color: #007bff;
+	text-decoration: none;
+}
+
+.link a:hover {
+	text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2 class="text-center mb-4">Sign Up</h2>
+		<form method="post" action="/signup" th:object="${user}">
+			<div class="form-group">
+				<p>
+					<label for="username">Username</label> <input type="text"
+						class="form-control" id="username" th:field="${user.username}"
+						placeholder="Enter your username" required>
+				</p>
+				<p>
+					<label for="password">Password</label> <input type="password"
+						class="form-control" id="password" th:field="${user.password}"
+						placeholder="Enter your password" required>
+				</p>
+				<p>
+					<label for="channelName">Channel Name</label> <input type="text"
+						class="form-control" id="channelName" th:field="${user.channelName}"
+						placeholder="Enter your channel name" required>
+				</p>
+			</div>
+			<input th:name="${_csrf.parameterName}" type="hidden"
+				th:value="${_csrf.token}" />
+
+			<button type="submit" class="btn btn-primary btn-block">Sign
+				Up</button>
+		</form>
+		<div class="link">
+			<p>
+				Already have an account? <a href="login.html">Login here</a>
+			</p>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

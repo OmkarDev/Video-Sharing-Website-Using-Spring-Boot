@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Cards</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+
+</head>
+<body>
+
+	<div th:fragment="video-cards">
+		<div class="container mt-4">
+			<div class="row">
+
+				<div th:each="video:${videos}" class="card video-card"
+					th:attr="onclick=|window.location.href='/video/${video.permalink}'|">
+					<img
+						th:src="@{/stream/{permalink}/thumbnail.png(permalink=${video.permalink})}"
+						class="card-img-top video-thumbnail" alt="Video Thumbnail">
+					<div class="card-body">
+						<div class="video-title" th:text="${video.title}">Sample
+							Video Title 1</div>
+						<div class="video-channel" th:if="${showChannelName=='true'}"
+							th:text="${video.user.channelName}">Channel Name 1</div>
+						<div class="video-views" th:text="${video.views}+' views'">500K
+							views</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
